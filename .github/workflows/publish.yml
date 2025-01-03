@@ -1,0 +1,130 @@
+name: Publish
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build_and_publish:
+    name: Build and publish
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Get resource pack version from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: resource_pack_version
+        with:
+          file: pack.toml
+          field: resource_pack.version
+
+      - name: Get supported Minecraft version from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: supported_minecraft_version
+        with:
+          file: pack.toml
+          field: resource_pack.supported_minecraft_version
+
+      - name: Get supported Minecraft version name from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: supported_minecraft_version_name
+        with:
+          file: pack.toml
+          field: resource_pack.supported_minecraft_version_name
+
+      - name: Print version string
+        run: echo version string ${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}
+
+      - name: Set release tag name environment variable
+        run: echo release_tag_name=v${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }} >> $GITHUB_ENV
+
+      - name: Get existing release
+        uses: cardinalby/git-get-release-action@v1
+        id: get_existing_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag: ${{ env.release_tag_name }}
+          doNotFailIfNotFound: true
+
+      - name: Check if an existing release with the same version exists
+        if: steps.get_existing_release.outputs.tag_name == env.release_tag_name
+        run: exit 1
+
+      - name: Get id from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: id
+        with:
+          file: pack.toml
+          field: resource_pack.id
+
+      - name: Get source directory from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: source_directory
+        with:
+          file: pack.toml
+          field: packsquash.source_directory
+
+      - name: Get output directory from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: output_directory
+        with:
+          file: pack.toml
+          field: packsquash.output_directory
+
+      - name: Get allowed mods from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: allow_mods
+        with:
+          file: pack.toml
+          field: packsquash.allow_mods
+
+      - name: Build resource pack using PackSquash
+        uses: ComunidadAylas/PackSquash-action@v4
+        with:
+          packsquash_version: latest
+          options: |
+            pack_directory = ${{ steps.source_directory.outputs.value }}
+            output_file_path = ${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip
+            allow_mods = ${{ steps.allow_mods.outputs.value }}
+
+      - name: Get CurseForge project ID from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: curseforge_project_id
+        with:
+          file: pack.toml
+          field: publishing.curseforge_project_id
+
+      - name: Get Modrinth project ID from pack.toml
+        uses: SebRollen/toml-action@v1.2.0
+        id: modrinth_project_id
+        with:
+          file: pack.toml
+          field: publishing.modrinth_project_id
+
+      # https://github.com/marketplace/actions/mc-publish
+      - name: Publish resource pack
+        uses: Kir-Antipov/mc-publish@v3.3
+        with:
+          # GitHub
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+
+          # Modrinth
+          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
+          modrinth-id: ${{ steps.modrinth_project_id.outputs.value }}
+
+          # CurseForge
+          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
+          curseforge-id: ${{ steps.curseforge_project_id.outputs.value }}
+
+          name: ${{ steps.resource_pack_version.outputs.value }} (${{ steps.supported_minecraft_version_name.outputs.value }})
+          github-tag: ${{ env.release_tag_name }}
+          files: |
+            build/*.zip
+          version-type: release
+          loaders: minecraft
+          game-versions: ${{ steps.supported_minecraft_version.outputs.value }}
+          modrinth-featured: false
+          changelog-file: CHANGELOG_LATEST.md
