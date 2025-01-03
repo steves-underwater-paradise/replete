@@ -90,8 +90,8 @@ jobs:
         with:
           packsquash_version: latest
           options: |
-            pack_directory = ./
-            output_file_path = ${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip
+            pack_directory = "export/"
+            output_file_path = "${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip"
             allow_mods = ${{ steps.allow_mods.outputs.value }}
 
       - name: Get CurseForge project ID from pack.toml
