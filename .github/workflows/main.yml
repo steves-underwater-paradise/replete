@@ -1,12 +1,33 @@
-name: Publish
+name: Resource Pack CI
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+  pull_request:
+    branches:
+      - '**'
 
 jobs:
+  skip_duplicate_jobs:
+    name: Skip duplicate jobs
+    continue-on-error: true # Uncomment once integration is finished
+    runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        uses: fkirc/skip-duplicate-actions@v5
+        with:
+          paths_ignore: '["**/README.md", "**/docs/**", "**/.gitignore", "**/LICENSE"]'
+          concurrent_skipping: same_content_newer
+
   build_and_publish:
     name: Build and publish
     runs-on: ubuntu-latest
+    needs: skip_duplicate_jobs
+    if: needs.skip_duplicate_jobs.outputs.should_skip != 'true'
     permissions:
       contents: write
 
@@ -96,45 +117,12 @@ jobs:
         with:
           packsquash_version: latest
           options: |
-            pack_directory = ${{ steps.source_directory.outputs.value }}
+            pack_directory = export/
             output_file_path = ${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip
             allow_mods = ${{ steps.allow_mods.outputs.value }}
 
-      - name: Get CurseForge project ID from pack.toml
-        uses: SebRollen/toml-action@v1.2.0
-        id: curseforge_project_id
+      - name: Upload PackSquash artifacts
+        uses: actions/upload-artifact@v4
         with:
-          file: pack.toml
-          field: publishing.curseforge_project_id
-
-      - name: Get Modrinth project ID from pack.toml
-        uses: SebRollen/toml-action@v1.2.0
-        id: modrinth_project_id
-        with:
-          file: pack.toml
-          field: publishing.modrinth_project_id
-
-      # https://github.com/marketplace/actions/mc-publish
-      - name: Publish resource pack
-        uses: Kir-Antipov/mc-publish@v3.3
-        with:
-          # GitHub
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          # Modrinth
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          modrinth-id: ${{ steps.modrinth_project_id.outputs.value }}
-
-          # CurseForge
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          curseforge-id: ${{ steps.curseforge_project_id.outputs.value }}
-
-          name: ${{ steps.resource_pack_version.outputs.value }} (${{ steps.supported_minecraft_version_name.outputs.value }})
-          github-tag: ${{ env.release_tag_name }}
-          files: |
-            build/*.zip
-          version-type: release
-          loaders: minecraft
-          game-versions: ${{ steps.supported_minecraft_version.outputs.value }}
-          modrinth-featured: false
-          changelog-file: CHANGELOG_LATEST.md
+          name: resource_pack
+          path: "**/build/"

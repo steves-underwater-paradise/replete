@@ -42,5 +42,4 @@ features, [create an issue](https://github.com/steves-underwater-paradise/replet
 
 ## License
 
-This project is licensed under CC-BY-SA-4.0,
-see [LICENSE](https://github.com/steves-underwater-paradise/replete/blob/1.20-1.20.1/LICENSE).
+This project is licensed under CC-BY-SA-4.0, see [LICENSE](LICENSE).
