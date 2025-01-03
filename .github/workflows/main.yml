@@ -83,6 +83,10 @@ jobs:
           cp pack.png export/pack.png
           cp -r assets/ export/assets/
 
+      - name: Create output directory
+        run: |
+          mkdir ${{ steps.output_directory.outputs.value }}/
+
       - name: Build resource pack using PackSquash
         uses: ComunidadAylas/PackSquash-action@v4
         with:
