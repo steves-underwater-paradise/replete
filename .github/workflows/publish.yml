@@ -11,7 +11,10 @@ jobs:
       contents: write
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # A non-shallow repository clone is required for PackSquash
 
       - name: Get resource pack version from pack.toml
         uses: SebRollen/toml-action@v1.2.0
