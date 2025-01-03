@@ -92,6 +92,7 @@ jobs:
         with:
           packsquash_version: latest
           options: |
+            artifact_name = "resource_pack"
             pack_directory = "export/"
             output_file_path = "${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip"
             allow_mods = ${{ steps.allow_mods.outputs.value }}
@@ -101,9 +102,3 @@ jobs:
 
             ["**/*?.md"]
             force_include = true
-
-      - name: Upload PackSquash artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: resource_pack
-          path: "**/build/"
