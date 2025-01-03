@@ -78,7 +78,7 @@ jobs:
           cp CHANGELOG_LATEST.md export/CHANGELOG_LATEST.md
           cp pack.mcmeta export/pack.mcmeta
           cp pack.png export/pack.png
-          cp assets/ export/assets/
+          cp -r assets/ export/assets/
 
       - name: Build resource pack using PackSquash
         uses: ComunidadAylas/PackSquash-action@v4
