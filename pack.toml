@@ -9,6 +9,5 @@ curseforge_project_id = 1149488
 modrinth_project_id = "JqODxgwm"
 
 [packsquash]
-included_paths = ["LICENSE", "README.md", "CHANGELOG.md", "CHANGELOG_LATEST.md", "pack.mcmeta", "pack.png", "assets/"]
 output_directory = "build"
 allow_mods = ["OptiFine"]

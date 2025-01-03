@@ -101,6 +101,12 @@ jobs:
             output_file_path = "${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip"
             allow_mods = ${{ steps.allow_mods.outputs.value }}
 
+            ["LICENSE"]
+            force_include = true
+
+            ["**/*?.md"]
+            force_include = true
+
       - name: Get CurseForge project ID from pack.toml
         uses: SebRollen/toml-action@v1.2.0
         id: curseforge_project_id
