@@ -60,13 +60,6 @@ jobs:
           file: pack.toml
           field: resource_pack.id
 
-      - name: Get source directory from pack.toml
-        uses: SebRollen/toml-action@v1.2.0
-        id: source_directory
-        with:
-          file: pack.toml
-          field: packsquash.source_directory
-
       - name: Get output directory from pack.toml
         uses: SebRollen/toml-action@v1.2.0
         id: output_directory
@@ -96,7 +89,7 @@ jobs:
         with:
           packsquash_version: latest
           options: |
-            pack_directory = ${{ steps.source_directory.outputs.value }}
+            pack_directory = ./
             output_file_path = ${{ steps.output_directory.outputs.value }}/${{ steps.id.outputs.value }}-${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}.zip
             allow_mods = ${{ steps.allow_mods.outputs.value }}
 

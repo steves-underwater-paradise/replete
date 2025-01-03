@@ -41,13 +41,6 @@ jobs:
           file: pack.toml
           field: resource_pack.version
 
-      - name: Get supported Minecraft version from pack.toml
-        uses: SebRollen/toml-action@v1.2.0
-        id: supported_minecraft_version
-        with:
-          file: pack.toml
-          field: resource_pack.supported_minecraft_version
-
       - name: Get supported Minecraft version name from pack.toml
         uses: SebRollen/toml-action@v1.2.0
         id: supported_minecraft_version_name
@@ -55,38 +48,12 @@ jobs:
           file: pack.toml
           field: resource_pack.supported_minecraft_version_name
 
-      - name: Print version string
-        run: echo version string ${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }}
-
-      - name: Set release tag name environment variable
-        run: echo release_tag_name=v${{ steps.resource_pack_version.outputs.value }}+mc${{ steps.supported_minecraft_version_name.outputs.value }} >> $GITHUB_ENV
-
-      - name: Get existing release
-        uses: cardinalby/git-get-release-action@v1
-        id: get_existing_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag: ${{ env.release_tag_name }}
-          doNotFailIfNotFound: true
-
-      - name: Check if an existing release with the same version exists
-        if: steps.get_existing_release.outputs.tag_name == env.release_tag_name
-        run: exit 1
-
       - name: Get id from pack.toml
         uses: SebRollen/toml-action@v1.2.0
         id: id
         with:
           file: pack.toml
           field: resource_pack.id
-
-      - name: Get source directory from pack.toml
-        uses: SebRollen/toml-action@v1.2.0
-        id: source_directory
-        with:
-          file: pack.toml
-          field: packsquash.source_directory
 
       - name: Get output directory from pack.toml
         uses: SebRollen/toml-action@v1.2.0
