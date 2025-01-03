@@ -104,6 +104,7 @@ jobs:
 
       - name: Copy resource pack files to export/
         run: |
+          mkdir export/
           cp LICENSE export/LICENSE
           cp README.md export/README.md
           cp CHANGELOG.md export/CHANGELOG.md
