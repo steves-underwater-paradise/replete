@@ -7,6 +7,7 @@ Included in the [Venture](https://github.com/steves-underwater-paradise/venture)
 
 ## Compatibility
 
+- PBR ([LabPBR format](https://shaderlabs.org/wiki/LabPBR_Material_Standard)): Some textures (0.75% complete)
 - Connected textures ([OptiFine format](https://optifine.readthedocs.io/ctm.html)): Some textures
   - [Continuity](https://modrinth.com/mod/continuity)
   - [OptiFine](https://optifine.net)
@@ -39,6 +40,14 @@ features, [create an issue](https://github.com/steves-underwater-paradise/replet
 
 - `git clone https://github.com/steves-underwater-paradise/replete.git`
 - `cd replete`
+
+### PBR
+
+For packing PBR textures into the LabPBR format, you need [`lab_pbr_cli`](https://github.com/steves-underwater-paradise/lab_pbr_cli).  
+
+- Install [Rust and Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html)
+- `cargo install --git https://github.com/steves-underwater-paradise/lab_pbr_cli.git`
+- `lab_pbr_cli --help`
 
 ## License
 
