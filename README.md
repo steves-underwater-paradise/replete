@@ -7,7 +7,7 @@ Included in the [Venture](https://github.com/steves-underwater-paradise/venture)
 
 ## Compatibility
 
-- PBR ([LabPBR format](https://shaderlabs.org/wiki/LabPBR_Material_Standard)): Some textures (0.75% complete)
+- PBR ([LabPBR format](https://shaderlabs.org/wiki/LabPBR_Material_Standard)): Some textures (10% complete)
 - Connected textures ([OptiFine format](https://optifine.readthedocs.io/ctm.html)): Some textures
   - [Continuity](https://modrinth.com/mod/continuity)
   - [OptiFine](https://optifine.net)
