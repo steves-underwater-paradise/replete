@@ -129,14 +129,6 @@ jobs:
           # GitHub
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
-          # Modrinth
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          modrinth-id: ${{ steps.modrinth_project_id.outputs.value }}
-
-          # CurseForge
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          curseforge-id: ${{ steps.curseforge_project_id.outputs.value }}
-
           name: ${{ steps.resource_pack_version.outputs.value }} (${{ steps.supported_minecraft_version_name.outputs.value }})
           github-tag: ${{ env.release_tag_name }}
           files: |

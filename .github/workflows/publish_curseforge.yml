@@ -126,13 +126,6 @@ jobs:
       - name: Publish resource pack
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          # GitHub
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-
-          # Modrinth
-          modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          modrinth-id: ${{ steps.modrinth_project_id.outputs.value }}
-
           # CurseForge
           curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
           curseforge-id: ${{ steps.curseforge_project_id.outputs.value }}
