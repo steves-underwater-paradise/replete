@@ -1,1 +1,28 @@
-Initial release!
+### Added
+
+- PBR textures for various blocks
+  - Acacia Door
+  - Amethyst
+  - Andesite
+  - Bamboo Mosaic
+  - Birch Door (partial; no height map)
+  - Cobblestone
+  - Diorite
+  - Granite
+  - Grass
+  - Oak Log
+  - Planks
+    - Bamboo
+    - Birch
+    - Cherry
+    - Dark Oak
+    - Mangrove
+    - Oak
+    - Spruce
+  - Rails
+    - Normal
+    - Powered (on state)
+  - Sand
+  - Stone
+  - Stripped Bamboo
+  - TNT
