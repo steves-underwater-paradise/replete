@@ -1,4 +1,4 @@
-name: Publish
+name: Publish (Modrinth)
 
 on:
   workflow_dispatch:

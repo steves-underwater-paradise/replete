@@ -1,4 +1,4 @@
-name: Publish
+name: Publish (GitHub releases)
 
 on:
   workflow_dispatch:
@@ -126,9 +126,8 @@ jobs:
       - name: Publish resource pack
         uses: Kir-Antipov/mc-publish@v3.3
         with:
-          # CurseForge
-          curseforge-token: ${{ secrets.CURSEFORGE_TOKEN }}
-          curseforge-id: ${{ steps.curseforge_project_id.outputs.value }}
+          # GitHub
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
           name: ${{ steps.resource_pack_version.outputs.value }} (${{ steps.supported_minecraft_version_name.outputs.value }})
           github-tag: ${{ env.release_tag_name }}
