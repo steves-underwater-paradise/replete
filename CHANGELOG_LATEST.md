@@ -1,28 +1,20 @@
 ### Added
 
-- PBR textures for various blocks
-  - Acacia Door
-  - Amethyst
-  - Andesite
-  - Bamboo Mosaic
-  - Birch Door (partial; no height map)
-  - Cobblestone
-  - Diorite
-  - Granite
-  - Grass
+- Textures for various items
+  - Charcoal
+  - Coal
+  - Flint
+  - Gold Nugget
+  - Iron Nugget
+  - Netherite Scrap
+  - Raw Copper
+  - Raw Gold
+  - Raw Iron
+
+### Changed
+
+- Textures for various blocks
+  - Calcite
   - Oak Log
-  - Planks
-    - Bamboo
-    - Birch
-    - Cherry
-    - Dark Oak
-    - Mangrove
-    - Oak
-    - Spruce
-  - Rails
-    - Normal
-    - Powered (on state)
-  - Sand
-  - Stone
-  - Stripped Bamboo
-  - TNT
+  - Smooth Basalt
+  - Tuff
