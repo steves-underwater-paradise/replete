@@ -1,0 +1,126 @@
+{
+  "variants": {
+    "": [
+      {
+        "model": "minecraft:block/oak_leaves_0_0",
+        "x": 0,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_1",
+        "x": 90,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_2",
+        "x": 0,
+        "y": 90,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_3",
+        "x": 90,
+        "y": 90,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_4",
+        "x": 270,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_5",
+        "x": 0,
+        "y": 270,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_6",
+        "x": 270,
+        "y": 270,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_7",
+        "x": 0,
+        "y": 180,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_8",
+        "x": 180,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_0_9",
+        "x": 180,
+        "y": 180,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_0",
+        "x": 0,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_1",
+        "x": 90,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_2",
+        "x": 0,
+        "y": 90,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_3",
+        "x": 90,
+        "y": 90,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_4",
+        "x": 270,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_5",
+        "x": 0,
+        "y": 270,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_6",
+        "x": 270,
+        "y": 270,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_7",
+        "x": 0,
+        "y": 180,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_8",
+        "x": 180,
+        "y": 0,
+        "weight": 1
+      },
+      {
+        "model": "minecraft:block/oak_leaves_1_9",
+        "x": 180,
+        "y": 180,
+        "weight": 1
+      }
+    ]
+  }
+}
